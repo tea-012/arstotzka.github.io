@@ -352,7 +352,9 @@
                     </div>
                 </div>
                 <div class="contact-form">
-                    <form id="appointment-form">
+                    <!-- ⚠️ ЗАМЕНИТЕ form-id НА ВАШ С formspree.io -->
+                    <form action="https://formspree.io/f/mjkdllzg" method="POST">
+                        <input type="hidden" name="_subject" value="Новая заявка с сайта Растоцкая">
                         <div class="form-group">
                             <label for="name">Ваше имя</label>
                             <input type="text" id="name" name="name" class="form-control" required placeholder="Иван Иванов">
@@ -496,70 +498,10 @@
             });
         }, { threshold: 0.1 });
 
-        // ===== TELEGRAM ФОРМА =====
-        function initTelegramForm() {
-            const appointmentForm = document.getElementById('appointment-form');
-            if (appointmentForm) {
-                appointmentForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    
-                    // Показываем загрузку
-                    const submitBtn = this.querySelector('.form-submit-btn');
-                    const originalText = submitBtn.textContent;
-                    submitBtn.textContent = 'Отправка...';
-                    
-                    const formData = new FormData(this);
-                    const data = Object.fromEntries(formData);
-                    
-                    // ⚠️ ЗАМЕНИТЕ ЭТИ ДАННЫЕ НА СВОИ:
-                    const BOT_TOKEN = '8558113510:AAHbh_Fcp4Z7Jq7IAImWbHpJf7WiV3pXmeE'; // Ваш токен от @BotFather
-                    const CHAT_ID = '8558113510'; // Ваш chat_id от @userinfobot
-                    
-                    const message = `🏥 НОВАЯ ЗАЯВКА С САЙТА
-
-👤 Имя: ${data.name}
-📞 Телефон: ${data.phone}
-🩺 Услуга: ${data.service}
-💬 Сообщение: ${data.message || 'Не указано'}
-⏰ Время: ${new Date().toLocaleString('ru-RU')}
-🌐 Сайт: ${window.location.href}`;
-
-                    // Отправка в Telegram
-                    fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-                        method: 'POST',
-                        headers: {'Content-Type': 'application/json'},
-                        body: JSON.stringify({
-                            chat_id: CHAT_ID,
-                            text: message
-                        })
-                    })
-                    .then(response => response.json())
-                    .then(result => {
-                        if (result.ok) {
-                            alert('✅ Заявка отправлена! Мы вам перезвоним.');
-                            this.reset();
-                        } else {
-                            alert('❌ Ошибка: ' + (result.description || 'Проверьте настройки бота'));
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        alert('❌ Ошибка сети. Позвоните нам напрямую: +7 (495) 666-13-13');
-                    })
-                    .finally(() => {
-                        submitBtn.textContent = originalText;
-                    });
-                });
-            }
-        }
-
         // ===== ИНИЦИАЛИЗАЦИЯ ВСЕХ ФУНКЦИЙ ПРИ ЗАГРУЗКЕ =====
         document.addEventListener('DOMContentLoaded', function() {
             // Инициализация FAQ
             initFAQ();
-            
-            // Инициализация Telegram формы
-            initTelegramForm();
             
             // Наблюдаем за секциями для анимаций
             const sectionsToObserve = [
