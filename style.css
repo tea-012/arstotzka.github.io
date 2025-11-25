@@ -395,7 +395,8 @@ nav ul li a:hover::after {
     flex-wrap: wrap;
 }
 
-/* ===== СЕКЦИЯ "О КЛИНИКЕ" ===== */
+/* ===== СЕКЦИЯ "О КЛИНИКЕ" - ИСПРАВЛЕННАЯ ===== */
+/* ===== СЕКЦИЯ "О КЛИНИКЕ" - ПРОСТОЕ ИСПРАВЛЕНИЕ ===== */
 .about {
     background-color: var(--gray);
     position: relative;
@@ -444,14 +445,13 @@ nav ul li a:hover::after {
     margin-bottom: 8px;
 }
 
-/* ===== ИСПРАВЛЕННОЕ ИЗОБРАЖЕНИЕ ===== */
 .about-image {
     border-radius: 5px;
     box-shadow: var(--shadow);
     position: relative;
     border: 2px solid var(--accent);
-    /* Убираем overflow для десктопа */
-    overflow: visible;
+    overflow: hidden;
+    width: 100%;
 }
 
 .about-image::before {
@@ -471,39 +471,34 @@ nav ul li a:hover::after {
     width: 100%;
     height: auto;
     display: block;
-    transition: transform 0.4s ease, filter 0.4s ease;
+    transition: var(--transition);
     filter: grayscale(30%);
-    border-radius: 3px;
 }
 
 .about-image:hover img {
-    transform: scale(1.04);
+    transform: scale(1.03);
     filter: grayscale(0%);
 }
 
-/* ===== МОБИЛЬНАЯ ВЕРСИЯ - С РАМКОЙ И БЕЗ ОБРЕЗКИ ===== */
+/* ===== МОБИЛЬНАЯ ВЕРСИЯ - ПРОСТО И БЕЗОПАСНО ===== */
 @media (max-width: 768px) {
     .about-content {
         grid-template-columns: 1fr;
         gap: 40px;
-        overflow: visible; /* Важно! */
     }
     
     .about-image {
         order: -1;
-        /* Сохраняем видимость и рамку */
-        overflow: visible;
         width: 100%;
         max-width: 100%;
     }
     
     .about-image::before {
-        /* Сохраняем рамку но уменьшаем для мобильных */
+        display: block;
         top: -8px;
         right: -8px;
         width: calc(100% + 16px);
         height: calc(100% + 16px);
-        display: block; /* Не убираем рамку! */
     }
     
     .about-image img {
@@ -512,17 +507,22 @@ nav ul li a:hover::after {
     }
     
     .about-image:hover img {
-        transform: none; /* Отключаем анимацию на мобильных */
+        transform: none;
     }
     
     .about-features {
         grid-template-columns: 1fr;
     }
     
-    /* Гарантируем что контейнер не обрезает контент */
-    .about .container {
-        overflow: visible;
+    /* Просто ограничиваем текст без скрытия */
+    .about-text {
+        max-width: 100%;
     }
+    
+    .about-text h2 {
+        font-size: 2rem;
+    }
+}
 
 /* ===== СЕКЦИЯ УСЛУГ ===== */
 .services {
@@ -554,7 +554,6 @@ nav ul li a:hover::after {
     opacity: 0;
     transform: translateY(30px);
     position: relative;
-    overflow: hidden;
 }
 
 .service-card::before {
@@ -617,7 +616,7 @@ nav ul li a:hover::after {
 }
 
 .service-content p {
-    color: #E0E0E0 !important;
+    color: #E0E0E0;
     margin-bottom: 20px;
     line-height: 1.6;
 }
@@ -791,7 +790,6 @@ nav ul li a:hover::after {
     background: rgba(255, 255, 255, 0.15);
 }
 
-/* Исправление цвета текста в выпадающем списке */
 select.form-control {
     color: #000000;
     background-color: #ffffff;
@@ -986,196 +984,6 @@ footer {
     background: #EC144C;
 }
 
-/* ===== АДАПТИВНОСТЬ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ ===== */
-@media (max-width: 1200px) {
-    .hero h1 {
-        font-size: 3.5rem;
-    }
-}
-
-@media (max-width: 992px) {
-    .about-content, .contact-container {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-    
-    .about-image {
-        order: -1;
-    }
-
-    .hero h1 {
-        font-size: 3rem;
-    }
-}
-
-@media (max-width: 768px) {
-    /* Мобильное меню */
-    .mobile-menu {
-        display: block;
-    }
-
-    nav ul {
-        position: fixed;
-        top: 80px;
-        left: -100%;
-        width: 100%;
-        height: calc(100vh - 80px);
-        background: var(--dark);
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
-        padding-top: 60px;
-        transition: var(--transition);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-        border-top: 1px solid var(--primary);
-        z-index: 1000;
-    }
-
-    nav ul.active {
-        left: 0;
-    }
-
-    nav ul li {
-        margin: 20px 0;
-        margin-left: 0;
-    }
-
-    /* Исправления для мобильных устройств */
-    body {
-        cursor: default;
-        width: 100vw;
-        overflow-x: hidden;
-    }
-    
-    .cursor, .cursor-follower {
-        display: none;
-    }
-    
-    .container {
-        width: 95%;
-        padding: 0 15px;
-    }
-    
-    section {
-        padding: 60px 0;
-        width: 100%;
-    }
-    
-    .hero {
-        padding: 150px 15px 100px;
-        width: 100%;
-        background-attachment: scroll;
-    }
-    
-    .hero h1 {
-        font-size: 2.2rem;
-        line-height: 1.3;
-    }
-    
-    .hero p {
-        font-size: 1.1rem;
-        padding: 0 10px;
-    }
-    
-    .hero-buttons {
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-    }
-    
-    .section-title h2 {
-        font-size: 2.2rem;
-    }
-    
-    .about-features {
-        grid-template-columns: 1fr;
-    }
-    
-    .services-grid {
-        grid-template-columns: 1fr;
-        gap: 25px;
-        padding: 0 10px;
-    }
-    
-    .service-card,
-    .specialist-card {
-        width: 100%;
-        margin: 0 0 25px 0;
-    }
-    
-    .contact-form {
-        padding: 25px;
-        margin: 0 10px;
-    }
-    
-    .form-submit-btn {
-        padding: 14px 24px;
-        font-size: 1rem;
-    }
-    
-    .music-player {
-        bottom: 5px;
-        left: 5px;
-        font-size: 0.7rem;
-        padding: 3px 8px;
-    }
-    
-    .scroll-to-top {
-        bottom: 20px;
-        right: 20px;
-        width: 45px;
-        height: 45px;
-    }
-    
-    footer {
-        padding: 50px 0 30px;
-    }
-    
-    .footer-content {
-        grid-template-columns: 1fr;
-        gap: 30px;
-        text-align: center;
-    }
-    
-    .footer-column h3::after {
-        left: 50%;
-        transform: translateX(-50%);
-    }
-    
-    .social-links {
-        justify-content: center;
-    }
-}
-
-@media (max-width: 480px) {
-    body {
-        min-width: 320px;
-    }
-    
-    .container {
-        padding: 0 10px;
-    }
-    
-    section {
-        padding: 40px 10px;
-    }
-    
-    .hero {
-        padding: 120px 10px 80px;
-    }
-    
-    .hero h1 {
-        font-size: 1.8rem;
-    }
-    
-    .section-title h2 {
-        font-size: 1.8rem;
-    }
-    
-    .contact-form {
-        padding: 20px 15px;
-    }
-}
 /* ===== СТАТИСТИКА ===== */
 .statistics {
     background: var(--dark);
@@ -1412,139 +1220,171 @@ footer {
     line-height: 1.6;
 }
 
-/* ===== ДОПОЛНИТЕЛЬНЫЕ АНИМАЦИИ ===== */
-@keyframes typewriter {
-    from { width: 0; }
-    to { width: 100%; }
+/* ===== АДАПТИВНОСТЬ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ ===== */
+@media (max-width: 1200px) {
+    .hero h1 {
+        font-size: 3.5rem;
+    }
 }
 
-@keyframes blink {
-    0%, 50% { opacity: 1; }
-    51%, 100% { opacity: 0; }
+@media (max-width: 992px) {
+    .about-content, .contact-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .about-image {
+        order: -1;
+    }
+
+    .hero h1 {
+        font-size: 3rem;
+    }
 }
 
-.typewriter {
-    overflow: hidden;
-    border-right: 2px solid var(--accent);
-    white-space: nowrap;
-    animation: typewriter 3s steps(40) 1s both, blink 0.8s infinite;
-}
-
-/* ===== ПАРАЛЛАКС ЭФФЕКТ ===== */
-.parallax {
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-/* ===== ИНТЕРАКТИВНЫЕ КАРТОЧКИ ===== */
-.interactive-card {
-    position: relative;
-    overflow: hidden;
-}
-
-.interactive-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-    transition: 0.5s;
-}
-
-.interactive-card:hover::before {
-    left: 100%;
-}
-
-/* ===== МОДАЛЬНОЕ ОКНО ===== */
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(10, 10, 10, 0.95);
-    z-index: 2000;
-    backdrop-filter: blur(10px);
-}
-
-.modal-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: var(--gray);
-    padding: 40px;
-    border-radius: 10px;
-    border: 2px solid var(--accent);
-    max-width: 500px;
-    width: 90%;
-}
-
-.modal-close {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: none;
-    border: none;
-    color: var(--accent);
-    font-size: 1.5rem;
-    cursor: pointer;
-}
-
-/* ===== ПРОГРЕСС БАР ===== */
-.progress-bar {
-    width: 100%;
-    height: 4px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 2px;
-    overflow: hidden;
-    margin: 20px 0;
-}
-
-.progress-fill {
-    height: 100%;
-    background: var(--red-gradient);
-    border-radius: 2px;
-    transition: width 1s ease;
-}
-
-/* ===== ТАЙМЕР ОБРАТНОГО ОТСЧЕТА ===== */
-.countdown {
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-    margin: 30px 0;
-}
-
-.countdown-item {
-    text-align: center;
-    padding: 15px;
-    background: rgba(220, 20, 60, 0.2);
-    border-radius: 5px;
-    min-width: 80px;
-}
-
-.countdown-number {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--accent);
-    display: block;
-}
-
-.countdown-label {
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    color: var(--light-text);
-    letter-spacing: 1px;
-}
-
-/* Адаптивность для новых секций */
 @media (max-width: 768px) {
+    /* Мобильное меню */
+    .mobile-menu {
+        display: block;
+    }
+
+    nav ul {
+        position: fixed;
+        top: 80px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 80px);
+        background: var(--dark);
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding-top: 60px;
+        transition: var(--transition);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        border-top: 1px solid var(--primary);
+        z-index: 1000;
+    }
+
+    nav ul.active {
+        left: 0;
+    }
+
+    nav ul li {
+        margin: 20px 0;
+        margin-left: 0;
+    }
+
+    /* Исправления для мобильных устройств */
+    body {
+        cursor: default;
+        width: 100vw;
+        overflow-x: hidden;
+    }
+    
+    .cursor, .cursor-follower {
+        display: none;
+    }
+    
+    .container {
+        width: 95%;
+        padding: 0 15px;
+    }
+    
+    section {
+        padding: 60px 0;
+        width: 100%;
+    }
+    
+    .hero {
+        padding: 150px 15px 100px;
+        width: 100%;
+        background-attachment: scroll;
+    }
+    
+    .hero h1 {
+        font-size: 2.2rem;
+        line-height: 1.3;
+    }
+    
+    .hero p {
+        font-size: 1.1rem;
+        padding: 0 10px;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .section-title h2 {
+        font-size: 2.2rem;
+    }
+    
+    .about-features {
+        grid-template-columns: 1fr;
+    }
+    
+    /* ИСПРАВЛЕНИЕ ДЛЯ ABOUT-IMAGE НА МОБИЛЬНЫХ */
+    .about-image {
+        overflow: visible !important;
+        width: 100%;
+    }
+    
+    .about-image::before {
+        display: block !important;
+        top: -8px !important;
+        right: -8px !important;
+        width: calc(100% + 16px) !important;
+        height: calc(100% + 16px) !important;
+    }
+    
+    .about-image img {
+        transform: none !important;
+    }
+    
+    .about-image:hover img {
+        transform: none !important;
+    }
+    
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        padding: 0 10px;
+    }
+    
+    .service-card,
+    .specialist-card {
+        width: 100%;
+        margin: 0 0 25px 0;
+        transform: none !important;
+    }
+    
+    .contact-form {
+        padding: 25px;
+        margin: 0 10px;
+    }
+    
+    .form-submit-btn {
+        padding: 14px 24px;
+        font-size: 1rem;
+    }
+    
+    .music-player {
+        bottom: 5px;
+        left: 5px;
+        font-size: 0.7rem;
+        padding: 3px 8px;
+    }
+    
+    .scroll-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+    }
+    
+    /* Статистика */
     .stats-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 20px;
@@ -1554,6 +1394,7 @@ footer {
         font-size: 2.5rem;
     }
     
+    /* Экстренная помощь */
     .emergency-content {
         grid-template-columns: 1fr;
         gap: 30px;
@@ -1575,159 +1416,15 @@ footer {
         height: 150px;
     }
     
-    .countdown {
-        flex-wrap: wrap;
+    /* Футер */
+    footer {
+        padding: 50px 0 30px;
     }
     
-    .countdown-item {
-        min-width: 70px;
-    }
-}
-/* ===== ИСПРАВЛЕНИЯ ДЛЯ МОБИЛЬНОЙ ВЕРСИИ ===== */
-@media (max-width: 768px) {
-    /* Исправление переполнения контента */
-    .container {
-        width: 100%;
-        max-width: 100%;
-        padding: 0 15px;
-        overflow-x: hidden;
-    }
-    
-    /* Исправление изображений */
-    .about-image img,
-    .specialist-img img,
-    .hero img {
-        max-width: 100%;
-        height: auto;
-        display: block;
-    }
-    
-    /* Исправление текстовых блоков */
-    .about-text,
-    .service-content,
-    .specialist-info,
-    .contact-details,
-    .footer-column {
-        width: 100%;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-    }
-    
-    /* Исправление длинных слов и текста */
-    h1, h2, h3, h4, h5, h6,
-    .logo-text,
-    .section-title h2,
-    .hero h1 {
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        hyphens: auto;
-    }
-    
-    /* Конкретные исправления для заголовков */
-    .hero h1 {
-        font-size: 2rem;
-        line-height: 1.2;
-        padding: 0 10px;
-    }
-    
-    .section-title h2 {
-        font-size: 1.8rem;
-        padding: 0 10px;
-    }
-    
-    /* Исправление секции "О клинике" */
-    .about-content {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-    
-    .about-image {
-        width: 100%;
-        margin: 0 auto;
-    }
-    
-    .about-image::before {
-        display: none; /* Убираем декоративный элемент на мобильных */
-    }
-    
-    /* Исправление карточек услуг и специалистов */
-    .services-grid,
-    .specialists-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-        padding: 0 5px;
-    }
-    
-    .service-card,
-    .specialist-card {
-        width: 100%;
-        margin: 0;
-        transform: none !important; /* Отключаем трансформации на мобильных */
-    }
-    
-    /* Исправление контактной формы */
-    .contact-container {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-    
-    .contact-form {
-        width: 100%;
-        margin: 0;
-        padding: 20px;
-    }
-    
-    /* Исправление статистики */
-    .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-        padding: 0 10px;
-    }
-    
-    .stat-item {
-        padding: 20px 10px;
-    }
-    
-    .stat-number {
-        font-size: 2rem;
-    }
-    
-    /* Исправление экстренной помощи */
-    .emergency-content {
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
-    
-    .emergency-contact {
-        flex-direction: column;
-        text-align: center;
-        padding: 15px 10px;
-    }
-    
-    .emergency-contact i {
-        margin-right: 0;
-        margin-bottom: 10px;
-    }
-    
-    /* Исправление FAQ */
-    .faq-question {
-        padding: 15px 20px;
-        font-size: 1rem;
-    }
-    
-    .faq-answer {
-        padding: 0 20px;
-    }
-    
-    .faq-item.active .faq-answer {
-        padding: 0 20px 15px;
-    }
-    
-    /* Исправление футера */
     .footer-content {
         grid-template-columns: 1fr;
-        text-align: center;
         gap: 30px;
+        text-align: center;
     }
     
     .footer-column h3::after {
@@ -1738,68 +1435,80 @@ footer {
     .social-links {
         justify-content: center;
     }
-    
-    /* Предотвращение горизонтального скролла */
-    html, body {
-        max-width: 100%;
-        overflow-x: hidden;
-        position: relative;
+}
+
+@media (max-width: 480px) {
+    body {
+        min-width: 320px;
     }
     
-    /* Исправление для очень маленьких экранов */
-    @media (max-width: 360px) {
-        .container {
-            padding: 0 10px;
-        }
-        
-        .hero h1 {
-            font-size: 1.7rem;
-        }
-        
-        .section-title h2 {
-            font-size: 1.5rem;
-        }
-        
-        .stats-grid {
-            grid-template-columns: 1fr;
-        }
-        
-        .btn {
-            padding: 12px 20px;
-            font-size: 0.9rem;
-        }
+    .container {
+        padding: 0 10px;
+    }
+    
+    section {
+        padding: 40px 10px;
+    }
+    
+    .hero {
+        padding: 120px 10px 80px;
+    }
+    
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+    
+    .section-title h2 {
+        font-size: 1.8rem;
+    }
+    
+    .contact-form {
+        padding: 20px 15px;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .btn {
+        padding: 12px 20px;
+        font-size: 0.9rem;
     }
 }
 
-/* ===== ДОПОЛНИТЕЛЬНЫЕ ИСПРАВЛЕНИЯ ДЛЯ ВСЕХ УСТРОЙСТВ ===== */
-/* Предотвращение выхода контента за пределы экрана */
+/* ===== ДОПОЛНИТЕЛЬНЫЕ СТИЛИ ===== */
+@keyframes typewriter {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+.typewriter {
+    overflow: hidden;
+    border-right: 2px solid var(--accent);
+    white-space: nowrap;
+    animation: typewriter 3s steps(40) 1s both, blink 0.8s infinite;
+}
+
+.parallax {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* Гарантия что изображения не выходят за экран */
 img {
     max-width: 100%;
     height: auto;
 }
 
-/* Исправление для текстовых контейнеров */
-.text-container {
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    hyphens: auto;
-}
-
-/* Исправление для таблиц */
-table {
-    width: 100%;
+/* Предотвращение горизонтального скролла */
+html, body {
     max-width: 100%;
-    overflow-x: auto;
-    display: block;
-}
-
-/* Исправление для преформатированного текста */
-pre {
-    white-space: pre-wrap;
-    word-wrap: break-word;
-}
-
-/* Исправление для длинных URL */
-a {
-    word-wrap: break-word;
+    overflow-x: hidden;
 }
