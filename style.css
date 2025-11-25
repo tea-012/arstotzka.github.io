@@ -444,38 +444,85 @@ nav ul li a:hover::after {
     margin-bottom: 8px;
 }
 
+/* ===== ИСПРАВЛЕННОЕ ИЗОБРАЖЕНИЕ ===== */
 .about-image {
     border-radius: 5px;
-    overflow: hidden;
     box-shadow: var(--shadow);
     position: relative;
     border: 2px solid var(--accent);
+    /* Убираем overflow для десктопа */
+    overflow: visible;
 }
 
 .about-image::before {
     content: '';
     position: absolute;
-    top: -15px;
-    right: -15px;
-    width: 100%;
-    height: 100%;
+    top: -12px;
+    right: -12px;
+    width: calc(100% + 24px);
+    height: calc(100% + 24px);
     border: 2px solid var(--primary);
     border-radius: 5px;
     z-index: -1;
+    background: var(--dark);
 }
 
 .about-image img {
     width: 100%;
     height: auto;
     display: block;
-    transition: var(--transition);
+    transition: transform 0.4s ease, filter 0.4s ease;
     filter: grayscale(30%);
+    border-radius: 3px;
 }
 
 .about-image:hover img {
-    transform: scale(1.03);
+    transform: scale(1.04);
     filter: grayscale(0%);
 }
+
+/* ===== МОБИЛЬНАЯ ВЕРСИЯ - С РАМКОЙ И БЕЗ ОБРЕЗКИ ===== */
+@media (max-width: 768px) {
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        overflow: visible; /* Важно! */
+    }
+    
+    .about-image {
+        order: -1;
+        /* Сохраняем видимость и рамку */
+        overflow: visible;
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    .about-image::before {
+        /* Сохраняем рамку но уменьшаем для мобильных */
+        top: -8px;
+        right: -8px;
+        width: calc(100% + 16px);
+        height: calc(100% + 16px);
+        display: block; /* Не убираем рамку! */
+    }
+    
+    .about-image img {
+        transform: none;
+        width: 100%;
+    }
+    
+    .about-image:hover img {
+        transform: none; /* Отключаем анимацию на мобильных */
+    }
+    
+    .about-features {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Гарантируем что контейнер не обрезает контент */
+    .about .container {
+        overflow: visible;
+    }
 
 /* ===== СЕКЦИЯ УСЛУГ ===== */
 .services {
@@ -1535,4 +1582,224 @@ footer {
     .countdown-item {
         min-width: 70px;
     }
+}
+/* ===== ИСПРАВЛЕНИЯ ДЛЯ МОБИЛЬНОЙ ВЕРСИИ ===== */
+@media (max-width: 768px) {
+    /* Исправление переполнения контента */
+    .container {
+        width: 100%;
+        max-width: 100%;
+        padding: 0 15px;
+        overflow-x: hidden;
+    }
+    
+    /* Исправление изображений */
+    .about-image img,
+    .specialist-img img,
+    .hero img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+    }
+    
+    /* Исправление текстовых блоков */
+    .about-text,
+    .service-content,
+    .specialist-info,
+    .contact-details,
+    .footer-column {
+        width: 100%;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+    
+    /* Исправление длинных слов и текста */
+    h1, h2, h3, h4, h5, h6,
+    .logo-text,
+    .section-title h2,
+    .hero h1 {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+    }
+    
+    /* Конкретные исправления для заголовков */
+    .hero h1 {
+        font-size: 2rem;
+        line-height: 1.2;
+        padding: 0 10px;
+    }
+    
+    .section-title h2 {
+        font-size: 1.8rem;
+        padding: 0 10px;
+    }
+    
+    /* Исправление секции "О клинике" */
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .about-image {
+        width: 100%;
+        margin: 0 auto;
+    }
+    
+    .about-image::before {
+        display: none; /* Убираем декоративный элемент на мобильных */
+    }
+    
+    /* Исправление карточек услуг и специалистов */
+    .services-grid,
+    .specialists-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 0 5px;
+    }
+    
+    .service-card,
+    .specialist-card {
+        width: 100%;
+        margin: 0;
+        transform: none !important; /* Отключаем трансформации на мобильных */
+    }
+    
+    /* Исправление контактной формы */
+    .contact-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .contact-form {
+        width: 100%;
+        margin: 0;
+        padding: 20px;
+    }
+    
+    /* Исправление статистики */
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        padding: 0 10px;
+    }
+    
+    .stat-item {
+        padding: 20px 10px;
+    }
+    
+    .stat-number {
+        font-size: 2rem;
+    }
+    
+    /* Исправление экстренной помощи */
+    .emergency-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .emergency-contact {
+        flex-direction: column;
+        text-align: center;
+        padding: 15px 10px;
+    }
+    
+    .emergency-contact i {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+    
+    /* Исправление FAQ */
+    .faq-question {
+        padding: 15px 20px;
+        font-size: 1rem;
+    }
+    
+    .faq-answer {
+        padding: 0 20px;
+    }
+    
+    .faq-item.active .faq-answer {
+        padding: 0 20px 15px;
+    }
+    
+    /* Исправление футера */
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 30px;
+    }
+    
+    .footer-column h3::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .social-links {
+        justify-content: center;
+    }
+    
+    /* Предотвращение горизонтального скролла */
+    html, body {
+        max-width: 100%;
+        overflow-x: hidden;
+        position: relative;
+    }
+    
+    /* Исправление для очень маленьких экранов */
+    @media (max-width: 360px) {
+        .container {
+            padding: 0 10px;
+        }
+        
+        .hero h1 {
+            font-size: 1.7rem;
+        }
+        
+        .section-title h2 {
+            font-size: 1.5rem;
+        }
+        
+        .stats-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .btn {
+            padding: 12px 20px;
+            font-size: 0.9rem;
+        }
+    }
+}
+
+/* ===== ДОПОЛНИТЕЛЬНЫЕ ИСПРАВЛЕНИЯ ДЛЯ ВСЕХ УСТРОЙСТВ ===== */
+/* Предотвращение выхода контента за пределы экрана */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Исправление для текстовых контейнеров */
+.text-container {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+}
+
+/* Исправление для таблиц */
+table {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    display: block;
+}
+
+/* Исправление для преформатированного текста */
+pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+/* Исправление для длинных URL */
+a {
+    word-wrap: break-word;
 }
