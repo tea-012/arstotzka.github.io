@@ -230,7 +230,7 @@
             <div class="emergency-content">
                 <div class="emergency-text">
                     <h2>Экстренная помощь 24/7</h2>
-                    <p>При острых психических состояниях мы готовы оказать помощь немедленно. Наша команда дежурных врачей работает круглосуточно.</p>
+                    <p>При острых психических состояниях мы готовы оказать помощь немедленно. Наша команда дежурных врачей работает круглосуточно. (Звонок с оператором записываеться). Все ради вашего здоровья!</p>
                     <div class="emergency-contacts">
                         <div class="emergency-contact">
                             <i class="fas fa-phone"></i>
@@ -247,11 +247,18 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="emergency-image">
-                    <div class="pulse-animation">
-                        <i class="fas fa-plus-circle"></i>
+                 <!-- Блок записи звонка -->
+                <div class="call-recording-notice">
+                    <i class="fas fa-microphone"></i>
+                    <div class="recording-text">
+                        <p>Все звонки с врачами записываются для контроля качества обслуживания</p>
+                        <small>Продолжая общение, вы соглашаетесь с записью разговора</small>
                     </div>
+                </div>
+            </div>
+            <div class="emergency-image">
+                <div class="pulse-animation">
+                    <i class="fas fa-plus-circle"></i>
                 </div>
             </div>
         </div>
@@ -352,35 +359,80 @@
                     </div>
                 </div>
                 <div class="contact-form">
-                    <!-- ⚠️ ЗАМЕНИТЕ form-id НА ВАШ С formspree.io -->
-                    <form action="https://formspree.io/f/mjkdllzg" method="POST">
-                        <input type="hidden" name="_subject" value="Новая заявка с сайта Растоцкая">
-                        <div class="form-group">
-                            <label for="name">Ваше имя</label>
-                            <input type="text" id="name" name="name" class="form-control" required placeholder="Иван Иванов">
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Телефон</label>
-                            <input type="tel" id="phone" name="phone" class="form-control" required placeholder="+7 (XXX) XXX-XX-XX">
-                        </div>
-                        <div class="form-group">
-                            <label for="service">Услуга</label>
-                            <select id="service" name="service" class="form-control" required>
-                                <option value="">Выберите услугу</option>
-                                <option value="Первичная консультация">Первичная консультация</option>
-                                <option value="Диагностика">Диагностика</option>
-                                <option value="Психотерапия">Психотерапия</option>
-                                <option value="Стационарное лечение">Стационарное лечение</option>
-                                <option value="Принудительное лечение">Принудительное лечение</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Сообщение (необязательно)</label>
-                            <textarea id="message" name="message" class="form-control" placeholder="Опишите вашу проблему или пожелания"></textarea>
-                        </div>
-                        <button type="submit" class="form-submit-btn">
-                            Отправить заявку
-                        </button>
+                <form id="appointment-form">
+    <input type="hidden" name="_subject" value="Новая заявка с сайта Растоцкая">
+    
+    <div class="form-group">
+        <label for="name">Ваше имя</label>
+        <input type="text" id="name" name="name" class="form-control" required placeholder="Иван Иванов">
+    </div>
+    
+    <div class="form-group">
+        <label for="phone">Телефон</label>
+        <input type="tel" id="phone" name="phone" class="form-control" required placeholder="+7 (XXX) XXX-XX-XX">
+    </div>
+    
+    <div class="form-group">
+        <label for="service">Услуга</label>
+        <select id="service" name="service" class="form-control" required>
+            <option value="">Выберите услугу</option>
+            <option value="Первичная консультация">Первичная консультация</option>
+            <option value="Диагностика">Диагностика</option>
+            <option value="Психотерапия">Психотерапия</option>
+            <option value="Стационарное лечение">Стационарное лечение</option>
+            <option value="Принудительное лечение">Принудительное лечение</option>
+        </select>
+    </div>
+    
+    <div class="form-group">
+        <label for="message">Сообщение (необязательно)</label>
+        <textarea id="message" name="message" class="form-control" placeholder="Опишите вашу проблему или пожелания"></textarea>
+    </div>
+    
+    <button type="submit" class="form-submit-btn">
+        Отправить заявку
+    </button>
+</form>
+
+<script>
+// AJAX отправка для Formspree
+document.getElementById('appointment-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const submitBtn = this.querySelector('.form-submit-btn');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Отправка...';
+    submitBtn.disabled = true;
+    
+    const formData = new FormData(this);
+    
+    // ⚠️ ЗАМЕНИТЕ НА ВАШ FORMSPREE EMAIL
+    const formspreeUrl = 'https://formspree.io/f/mjkdllzg';
+    
+    fetch(formspreeUrl, {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'Accept': 'application/json'
+        }
+    })
+    .then(response => {
+        if (response.ok) {
+            alert('✅ Заявка отправлена! Мы вам перезвоним.');
+            this.reset();
+        } else {
+            throw new Error('Ошибка отправки');
+        }
+    })
+    .catch(error => {
+        alert('❌ Ошибка отправки. Позвоните нам: +7 (495) 666-13-13');
+    })
+    .finally(() => {
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+    });
+});
+</script>
                     </form>
                 </div>
             </div>
