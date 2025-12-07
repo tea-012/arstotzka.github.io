@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Принудительное лечение - Клиника Растоцкая</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Стили только для этой страницы */
+        .service-page {
+            padding-top: 100px;
+            background: #2a2a2a;
+            min-height: 100vh;
+        }
+        
+        .service-header {
+            background: linear-gradient(rgba(10, 10, 10, 0.9), rgba(70, 0, 0, 0.85)), url('https://images.unsplash.com/photo-1546453667-8a8d2d07bc20?ixlib=rb-4.0.3&auto=format&fit=crop&w=2067&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 100px 20px;
+            text-align: center;
+            color: white;
+            margin-bottom: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 80%, rgba(220, 20, 60, 0.15) 0%, transparent 50%);
+        }
+        
+        .lock-icon {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 30px;
+            position: relative;
+            z-index: 1;
+            animation: lock-float 4s ease-in-out infinite;
+        }
+        
+        .lock-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 0 20px rgba(220, 20, 60, 0.6));
+        }
+        
+        @keyframes lock-float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-10px) rotate(5deg);
+            }
+        }
+        
+        .service-header h1 {
+            font-size: 3.2rem;
+            margin-bottom: 20px;
+            color: white;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .service-header .tagline {
+            font-size: 1.8rem;
+            color: #ff9999;
+            margin-bottom: 30px;
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .service-header .subtitle {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            color: #e0e0e0;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .service-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 80px;
+        }
+        
+        .content-block {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border-left: 5px solid var(--accent);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .content-block h2 {
+            color: var(--accent);
+            font-size: 2rem;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(220, 20, 60, 0.3);
+        }
+        
+        .content-block p {
+            color: #e0e0e0;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .content-block ul, .content-block ol {
+            color: #e0e0e0;
+            padding-left: 25px;
+            margin-bottom: 25px;
+        }
+        
+        .content-block li {
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+        
+        .warning-box {
+            background: linear-gradient(135deg, rgba(139, 0, 0, 0.2), rgba(220, 20, 60, 0.15));
+            border-left: 4px solid #ff4444;
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 5px;
+            border-top: 1px solid rgba(255, 68, 68, 0.3);
+            border-bottom: 1px solid rgba(255, 68, 68, 0.3);
+        }
+        
+        .warning-box p {
+            color: #ffcccc;
+            font-style: italic;
+            margin-bottom: 0;
+            font-weight: 500;
+        }
+        
+        .warning-box i {
+            color: #ff4444;
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid rgba(220, 20, 60, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--dark-red), var(--accent));
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 25px rgba(139, 0, 0, 0.4);
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #8B0000, #600000);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: white;
+            font-size: 1.8rem;
+            border: 2px solid rgba(220, 20, 60, 0.3);
+        }
+        
+        .feature-card h3 {
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .feature-card p {
+            color: #d0d0d0;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .feature-note {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 12px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            color: #ff9999;
+            font-style: italic;
+            border-left: 3px solid #ff4444;
+            margin-top: 15px;
+        }
+        
+        .legal-section {
+            background: rgba(30, 30, 30, 0.8);
+            padding: 30px;
+            border-radius: 8px;
+            margin: 40px 0;
+            border: 1px solid rgba(220, 20, 60, 0.2);
+        }
+        
+        .legal-section h3 {
+            color: #ff9999;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+        
+        .legal-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .legal-section li {
+            margin-bottom: 15px;
+            padding-left: 25px;
+            position: relative;
+            color: #d0d0d0;
+        }
+        
+        .legal-section li::before {
+            content: '§';
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        
+        .conditions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .condition-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid rgba(220, 20, 60, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .condition-item:hover {
+            border-color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(139, 0, 0, 0.2);
+        }
+        
+        .condition-item h4 {
+            color: var(--accent);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .condition-item h4 i {
+            margin-right: 10px;
+            color: #ff4444;
+        }
+        
+        .condition-item p {
+            color: #d0d0d0;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        
+        .process-steps {
+            position: relative;
+            margin: 40px 0;
+            padding-left: 40px;
+        }
+        
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--dark-red), var(--accent));
+        }
+        
+        .process-step {
+            margin-bottom: 35px;
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .process-step::before {
+            content: '';
+            position: absolute;
+            left: -27px;
+            top: 5px;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--dark-red), var(--accent));
+            border: 3px solid #2a2a2a;
+            z-index: 2;
+        }
+        
+        .process-step h3 {
+            color: white;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+        
+        .process-step p {
+            color: #d0d0d0;
+            line-height: 1.6;
+        }
+        
+        .security-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .security-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid rgba(220, 20, 60, 0.1);
+        }
+        
+        .security-item h4 {
+            color: #ff9999;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .security-item h4 i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+        
+        .security-item p {
+            color: #d0d0d0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .service-cta {
+            text-align: center;
+            padding: 50px 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            margin-top: 60px;
+            border: 2px solid var(--accent);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        }
+        
+        .service-cta h3 {
+            color: white;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+        
+        .service-cta p {
+            color: #e0e0e0;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        /* Мобильная версия */
+        @media (max-width: 768px) {
+            .service-page {
+                padding-top: 80px;
+            }
+            
+            .service-header {
+                padding: 60px 15px;
+            }
+            
+            .lock-icon {
+                width: 80px;
+                height: 80px;
+                margin-bottom: 20px;
+            }
+            
+            .service-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .service-header .tagline {
+                font-size: 1.3rem;
+            }
+            
+            .service-content {
+                padding: 0 15px 50px;
+            }
+            
+            .content-block {
+                padding: 25px;
+            }
+            
+            .content-block h2 {
+                font-size: 1.6rem;
+            }
+            
+            .features-grid, .conditions-grid, .security-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .process-steps {
+                padding-left: 30px;
+            }
+            
+            .process-step {
+                padding-left: 20px;
+            }
+            
+            .process-step::before {
+                left: -22px;
+            }
+            
+            .service-cta {
+                padding: 35px 20px;
+                margin-top: 40px;
+            }
+            
+            .service-cta h3 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="container header-container">
+            <div class="logo">
+                <img src="logo.png" alt="Логотип" style="width: 40px; height: 40px; margin-right: 12px;">
+                <div class="logo-text">Растоц<span>кая</span></div>
+            </div>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="index.html#services">Услуги</a></li>
+                    <li><a href="index.html#specialists">Специалисты</a></li>
+                    <li><a href="#service-cta">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="service-page">
+        <!-- Заголовок услуги с иконкой замка -->
+        <div class="service-header">
+            <div class="lock-icon">
+                <!-- SVG замка -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+                </svg>
+            </div>
+            <h1><i class="fas fa-gavel"></i> Принудительное лечение</h1>
+            <div class="tagline">Когда лечение — не выбор, а необходимость. Для безопасности всех.</div>
+            <p class="subtitle">
+                Специализированные программы для пациентов, представляющих опасность для себя или окружающих. 
+                Лечение осуществляется в соответствии с законодательством РФ и под строгим контролем.
+            </p>
+        </div>
+
+        <div class="service-content">
+            <!-- Подробное описание -->
+            <section class="content-block">
+                <h2><i class="fas fa-balance-scale"></i> Что такое принудительное лечение?</h2>
+                <p>
+                    Принудительное лечение — это особый вид психиатрической помощи, который применяется к лицам, 
+                    совершившим общественно опасные деяния в состоянии невменяемости, или к лицам, у которых 
+                    после совершения преступления наступило психическое расстройство, делающее невозможным 
+                    назначение или исполнение наказания.
+                </p>
+                <p>
+                    В отличие от добровольного лечения, принудительное лечение осуществляется по решению суда 
+                    и предполагает особые условия содержания, повышенные меры безопасности и постоянный 
+                    медицинский контроль.
+                </p>
+                
+                <div class="warning-box">
+                    <p><i class="fas fa-exclamation-triangle"></i> Важно: Принудительное лечение назначается 
+                    исключительно по решению суда на основании судебно-психиатрической экспертизы. Самостоятельное 
+                    обращение за принудительным лечением невозможно.</p>
+                </div>
+                
+                <p>
+                    Наша клиника имеет лицензию на оказание принудительных мер медицинского характера и 
+                    специализированное отделение, оборудованное в соответствии со всеми требованиями безопасности.
+                </p>
+            </section>
+
+            <!-- Особенности лечения -->
+            <section class="content-block">
+                <h2><i class="fas fa-shield-alt"></i> Особенности принудительного лечения</h2>
+                <p>
+                    Принудительное лечение в нашей клинике имеет ряд принципиальных отличий от обычного 
+                    стационарного лечения:
+                </p>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <h3>Максимальный уровень безопасности</h3>
+                        <p>
+                            Отделение оборудовано системами круглосуточного видеонаблюдения, специальными 
+                            средствами фиксации, антивандальной мебелью. Персонал проходит специальную подготовку.
+                        </p>
+                        <div class="feature-note">
+                            Мы заботимся о безопасности всех: пациентов, персонала и окружающих.
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-file-contract"></i>
+                        </div>
+                        <h3>Строгий юридический контроль</h3>
+                        <p>
+                            Все этапы лечения документируются и контролируются. Регулярные отчеты в суд и 
+                            органы прокуратуры. Соблюдение всех процессуальных норм и сроков.
+                        </p>
+                        <div class="feature-note">
+                            Бумажная работа иногда занимает больше времени, чем само лечение. Это нормально.
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                        <h3>Интенсивная терапия</h3>
+                        <p>
+                            Комплексное лечение с применением современных методов. Ежедневный контроль состояния, 
+                            регулярные комиссионные осмотры, индивидуальные программы реабилитации.
+                        </p>
+                        <div class="feature-note">
+                            Цель — не просто изоляция, а реальное улучшение состояния пациента.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Правовые основания -->
+            <section class="content-block">
+                <h2><i class="fas fa-scale-balanced"></i> Правовые основания</h2>
+                <p>
+                    Принудительное лечение осуществляется строго в рамках законодательства Российской Федерации:
+                </p>
+                
+                <div class="legal-section">
+                    <h3><i class="fas fa-book-law"></i> Нормативно-правовая база:</h3>
+                    <ul>
+                        <li>Уголовный кодекс РФ (статьи 97-104)</li>
+                        <li>Уголовно-процессуальный кодекс РФ</li>
+                        <li>Федеральный закон "О психиатрической помощи и гарантиях прав граждан при ее оказании"</li>
+                        <li>Приказы Министерства здравоохранения РФ</li>
+                        <li>Внутренние регламенты клиники, утвержденные Минздравом</li>
+                    </ul>
+                </div>
+                
+                <p>
+                    Лечение может быть назначено только после проведения комплексной 
+                    судебно-психиатрической экспертизы и вынесения соответствующего решения суда. 
+                    Продление или прекращение принудительного лечения также осуществляется по решению суда 
+                    на основании заключения врачебной комиссии.
+                </p>
+            </section>
+
+            <!-- Условия и показания -->
+            <section class="content-block">
+                <h2><i class="fas fa-clipboard-list"></i> Условия и показания</h2>
+                <p>
+                    Принудительное лечение назначается при наличии следующих условий:
+                </p>
+                
+                <div class="conditions-grid">
+                    <div class="condition-item">
+                        <h4><i class="fas fa-brain"></i> Психическое расстройство</h4>
+                        <p>
+                            Наличие диагноза, входящего в перечень заболеваний, при которых возможно 
+                            назначение принудительных мер медицинского характера.
+                        </p>
+                    </div>
+                    
+                    <div class="condition-item">
+                        <h4><i class="fas fa-exclamation-circle"></i> Общественная опасность</h4>
+                        <p>
+                            Совершение общественно опасного деяния или реальная угроза его совершения 
+                            вследствие психического расстройства.
+                        </p>
+                    </div>
+                    
+                    <div class="condition-item">
+                        <h4><i class="fas fa-balance-scale"></i> Невменяемость</h4>
+                        <p>
+                            Установление факта невменяемости в момент совершения деяния или развитие 
+                            психического расстройства после совершения преступления.
+                        </p>
+                    </div>
+                    
+                    <div class="condition-item">
+                        <h4><i class="fas fa-hospital"></i> Необходимость лечения</h4>
+                        <p>
+                            Заключение экспертов о необходимости принудительного лечения для предотвращения 
+                            повторных общественно опасных действий.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Процесс организации -->
+            <section class="content-block">
+                <h2><i class="fas fa-list-ol"></i> Процесс организации лечения</h2>
+                <p>
+                    Организация принудительного лечения проходит в несколько этапов:
+                </p>
+                
+                <div class="process-steps">
+                    <div class="process-step">
+                        <h3>1. Судебно-психиатрическая экспертиза</h3>
+                        <p>
+                            Проведение комплексной экспертизы для установления психического состояния, 
+                            определения невменяемости и необходимости принудительного лечения.
+                        </p>
+                    </div>
+                    
+                    <div class="process-step">
+                        <h3>2. Судебное решение</h3>
+                        <p>
+                            Рассмотрение дела в суде, вынесение решения о назначении принудительного 
+                            лечения и определении его вида.
+                        </p>
+                    </div>
+                    
+                    <div class="process-step">
+                        <h3>3. Госпитализация</h3>
+                        <p>
+                            Перевод пациента в специализированное отделение под конвоем. Оформление 
+                            медицинской документации, первичный осмотр.
+                        </p>
+                    </div>
+                    
+                    <div class="process-step">
+                        <h3>4. Разработка плана лечения</h3>
+                        <p>
+                            Врачебная комиссия разрабатывает индивидуальный план лечения с учетом 
+                            диагноза, особенностей пациента и рекомендаций экспертов.
+                        </p>
+                    </div>
+                    
+                    <div class="process-step">
+                        <h3>5. Лечение и наблюдение</h3>
+                        <p>
+                            Проведение лечения, регулярные осмотры, коррекция терапии. Ежегодные 
+                            комиссионные осмотры для решения вопроса о продлении или прекращении лечения.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Меры безопасности -->
+            <section class="content-block">
+                <h2><i class="fas fa-user-shield"></i> Меры безопасности</h2>
+                <p>
+                    Отделение принудительного лечения оборудовано с учетом максимальных требований безопасности:
+                </p>
+                
+                <div class="security-section">
+                    <div class="security-item">
+                        <h4><i class="fas fa-video"></i> Круглосуточное видеонаблюдение</h4>
+                        <p>
+                            Все помещения находятся под постоянным видеоконтролем. Записи хранятся 90 дней.
+                        </p>
+                    </div>
+                    
+                    <div class="security-item">
+                        <h4><i class="fas fa-door-closed"></i> Специальные помещения</h4>
+                        <p>
+                            Палаты с антивандальным оборудованием, специальными замками, защищенными 
+                            коммуникациями.
+                        </p>
+                    </div>
+                    
+                    <div class="security-item">
+                        <h4><i class="fas fa-user-check"></i> Подготовленный персонал</h4>
+                        <p>
+                            Врачи и медсестры проходят специальную подготовку по работе с агрессивными 
+                            пациентами.
+                        </p>
+                    </div>
+                    
+                    <div class="security-item">
+                        <h4><i class="fas fa-history"></i> Протоколы действий</h4>
+                        <p>
+                            Четкие инструкции на все случаи, включая чрезвычайные ситуации. Регулярные учения.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA -->
+            <div class="service-cta">
+                <h3>Вопросы по принудительному лечению?</h3>
+                <p>
+                    Для получения информации о порядке организации принудительного лечения, 
+                    условиях содержания или юридических аспектах обратитесь к нашим специалистам.
+                </p>
+                <a href="index.html#contact" class="btn" style="font-size: 1.1rem; padding: 14px 35px; background: linear-gradient(135deg, #8B0000, #600000);">
+                    <i class="fas fa-phone-alt"></i> Консультация специалиста
+                </a>
+                <p style="margin-top: 20px; color: #d0d0d0; font-size: 0.95rem;">
+                    Для экстренных обращений: <strong style="color: white;">+7 (495) 666-13-13</strong>
+                </p>
+                <p style="margin-top: 10px; color: #ff9999; font-size: 0.9rem; font-style: italic;">
+                    * Информация предоставляется в соответствии с законодательством РФ
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Клиника "Растоцкая"</h3>
+                    <p>Специализированная психиатрическая помощь с гарантией конфиденциальности и индивидуальным подходом к каждому пациенту.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-vk"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Услуги</h3>
+                    <ul>
+                        <li><a href="diagnes.html">Психиатрическая диагностика</a></li>
+                        <li><a href="inpatient.html">Стационарное лечение</a></li>
+                        <li><a href="treatment.html" style="color: var(--accent); font-weight: 600;">Принудительное лечение</a></li>
+                        <li><a href="semeynaya.html">Семейная психотерапия</a></li>
+                        <li><a href="reabilitaciya.html">Реабилитационные программы</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Быстрые ссылки</h3>
+                    <ul>
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="index.html#services">Услуги</a></li>
+                        <li><a href="index.html#specialists">Специалисты</a></li>
+                        <li><a href="index.html#contact">Контакты</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Контакты</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> г. Москва, ул. Растоцкая, д. 13</li>
+                        <li><i class="fas fa-phone"></i> +7 (495) 666-13-13</li>
+                        <li><i class="fas fa-envelope"></i> info@rastotskaya.ru</li>
+                        <li><i class="fas fa-clock"></i> Круглосуточно</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Клиника "Растоцкая". Все права защищены. <span style="color: #DC143C;">Лицензия № ЛО-77-01-019666</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Мобильное меню
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const navMenu = document.querySelector('nav ul');
+            
+            if (mobileMenu) {
+                mobileMenu.addEventListener('click', () => {
+                    navMenu.classList.toggle('active');
+                    mobileMenu.querySelector('i').classList.toggle('fa-bars');
+                    mobileMenu.querySelector('i').classList.toggle('fa-times');
+                });
+            }
+            
+            // Курсор
+            const cursor = document.querySelector('.cursor');
+            const cursorFollower = document.querySelector('.cursor-follower');
+            
+            if (cursor && cursorFollower && window.innerWidth > 768) {
+                document.addEventListener('mousemove', (e) => {
+                    cursor.style.left = e.clientX + 'px';
+                    cursor.style.top = e.clientY + 'px';
+                    
+                    setTimeout(() => {
+                        cursorFollower.style.left = e.clientX + 'px';
+                        cursorFollower.style.top = e.clientY + 'px';
+                    }, 100);
+                });
+                
+                const hoverElements = document.querySelectorAll('a, .feature-card, .condition-item, .security-item');
+                hoverElements.forEach(el => {
+                    el.addEventListener('mouseenter', () => {
+                        cursor.style.transform = 'scale(1.5)';
+                        cursorFollower.style.transform = 'scale(1.5)';
+                    });
+                    
+                    el.addEventListener('mouseleave', () => {
+                        cursor.style.transform = 'scale(1)';
+                        cursorFollower.style.transform = 'scale(1)';
+                    });
+                });
+            }
+            
+            // Анимация при скролле
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            // Анимация элементов
+            document.querySelectorAll('.feature-card, .condition-item, .process-step, .security-item').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
